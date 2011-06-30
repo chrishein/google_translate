@@ -39,7 +39,7 @@ module Google
       
       raise(MissingFromLanguage) if @from.nil?
       raise(MissingToLanguage) if @to.nil?
-      raise(MissingTextLanguage) if from_text.nil?
+      raise(MissingText) if from_text.nil?
       
       begin
         
