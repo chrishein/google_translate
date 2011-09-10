@@ -1,4 +1,3 @@
-# google_translate.rb
 
 require "httparty"
 
