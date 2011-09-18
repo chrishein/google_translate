@@ -1,23 +1,30 @@
 # coding: utf-8
-require '../src/google_translate.rb'
+require '../lib/google_translate.rb'
+require "test/unit"
 
-api_key = ENV['GOOGLE_API_KEY']
+class TestGoogleTranslate < Test::Unit::TestCase
+  
+  def test_spanish
+    from = 'es'
+    to = 'en'
+    @t = Google::Translator.new(from, to, {:api_key => ENV['GOOGLE_API_KEY']})
+    
+    assert_equal('dog', @t.translate('perro') )
+    assert_equal('Dog', @t.translate('Perro') )
+    assert_equal('Hello', @t.translate('Hola') )
+    assert_equal('Athletic', @t.translate('Atlético') )
+    assert_equal('Giraffe', @t.translate('Jirafa') )
+    assert_equal('search', @t.translate('búsqueda') )
+    assert_equal('translation', @t.translate('traducción') )
+  end
+    
+  def test_french
+    from = 'es'
+    to = 'fr'
+    @t = Google::Translator.new(from, to, {:api_key => ENV['GOOGLE_API_KEY']})
+    
+    assert_equal('chien', @t.translate('perro') )
+    
+  end
 
-from = 'es'
-to = 'en'
-@gt = Google::Translator.new(from, to, {:api_key => api_key}) 
-puts @gt.translate('perro')
-
-terms = ['Perro', 'Gato', 'Hola', 'Atlético', 'Perro', 'Jirafa', 'búsqueda', 'traducción', 'gato', 'perro']
-
-terms.each do |t|
-  puts @gt.translate(t)
-end
-
-
-to = 'fr'
-@gt = Google::Translator.new(from, to, {:api_key => api_key})
-
-terms.each do |t|
-  puts @gt.translate(t)
 end
