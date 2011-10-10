@@ -20,5 +20,7 @@ to the translate method.
 
    @gt.translate('A longer sentence that won't likely be repeated', { :cache => false })
 
+See Google Translate API v2 for details about parameters, including {supported language codes}[http://code.google.com/apis/language/translate/v2/using_rest.html#language-params].
+
 ==License
 Copyright © 2011 Christian Hein, released under the MIT license
