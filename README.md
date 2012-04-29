@@ -20,7 +20,7 @@ Or install it yourself as:
 
     from_language = 'es'
     to_language = 'en'
-    @gt = Google::Translator.new(from_language, to_language, {:api_key => 'YOUR_API_KEY'})
+    @gt = Google::Translate.new(from_language, to_language, {:api_key => 'YOUR_API_KEY'})
     puts @gt.translate('perro')
 
 By default, the translator caches term translations in order to avoid unnecessary requests.
@@ -39,6 +39,8 @@ to the translate method.
     @gt.translate('A longer sentence that won't likely be repeated', { :cache => false })
 
 See Google Translate API v2 for details about parameters, including [supported language codes](http://code.google.com/apis/language/translate/v2/using_rest.html#language-params).
+
+Note: Google::Translator can still be used instead of Google::Translate for backwards compatibility
 
 ## Contributing
 
