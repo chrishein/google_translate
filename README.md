@@ -18,23 +18,27 @@ Or install it yourself as:
 
 ## Usage
 
-   from_language = 'es'
-   to_language = 'en'
-   @gt = Google::Translator.new(from_language, to_language, {:api_key => 'YOUR_API_KEY'})
-   puts @gt.translate('perro')
+    from_language = 'es'
+    to_language = 'en'
+    @gt = Google::Translator.new(from_language, to_language, {:api_key => 'YOUR_API_KEY'})
+    puts @gt.translate('perro')
 
 By default, the translator caches term translations in order to avoid unnecessary requests.
 This can be globally disabled passing:
-   :cache => false
+
+    :cache => false
+
 in the options hash.
 
 You can also skip the caching only for certain translation requests by passing
-   :cache => false 
+
+    :cache => false
+
 to the translate method.
 
-   @gt.translate('A longer sentence that won't likely be repeated', { :cache => false })
+    @gt.translate('A longer sentence that won't likely be repeated', { :cache => false })
 
-See Google Translate API v2 for details about parameters, including {supported language codes}[http://code.google.com/apis/language/translate/v2/using_rest.html#language-params].
+See Google Translate API v2 for details about parameters, including [supported language codes](http://code.google.com/apis/language/translate/v2/using_rest.html#language-params).
 
 ## Contributing
 
