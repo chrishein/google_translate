@@ -1,10 +1,9 @@
-require 'httparty'
+require 'rest_client'
+require 'multi_json'
+
 
 module Google
   class Translate
-    include HTTParty
-
-    base_uri 'https://www.googleapis.com/language/translate/'
     
     def initialize(from, to='en', options={})
       @options = {
@@ -18,6 +17,8 @@ module Google
       @from = from
       @to = to
       @cache_terms = Hash.new
+      
+      @service = RestClient::Resource.new('https://www.googleapis.com/language/translate/v2')
     end
     
     
@@ -42,23 +43,22 @@ module Google
         
         return @cache_terms[from_text] if options[:cache] and @cache_terms[from_text]
         
-        params = {:query => { :key => @api_key,
-                              :source => @from,
-                              :target => @to,
-                              :q => from_text
-                            }}
+        params = {  :key => @api_key,
+                    :source => @from,
+                    :target => @to,
+                    :q => from_text }
         
-        response = self.class.get("/v2", params)
-     
+        response = @service.get :params => params, :content_type => 'json'
+        
         raise(InvalidResponse, response.code) if response.code != 200
-     
-        response = (response && response.parsed_response) ? response.parsed_response : nil
         raise(TranslateServerIsDown) if (!response || response.empty?)
+     
+        response = MultiJson.decode(response)      
               
         to_text = response['data']['translations'][0]['translatedText']
         @cache_terms[from_text] = to_text if options[:cache]
         return to_text
-      rescue HTTParty::ResponseError
+      rescue Exception => e
         raise(TranslateServerIsDown)
       end
     end
