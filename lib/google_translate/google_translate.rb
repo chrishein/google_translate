@@ -1,5 +1,5 @@
 require 'rest_client'
-
+require 'json'
 
 module Google
   class Translate
