@@ -15,8 +15,8 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = GoogleTranslate::VERSION
 
-  gem.add_dependency 'rest-client'
+  gem.add_dependency 'rest-client', "2.1.0"
 
-  gem.add_development_dependency 'rspec'
-  gem.add_development_dependency 'rake'
+  gem.add_development_dependency 'rspec', '3.4.0'
+  gem.add_development_dependency 'rake', '11.3.0'
 end
